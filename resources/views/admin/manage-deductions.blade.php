@@ -30,6 +30,8 @@
             background: #0f172a;
             color: white;
             padding: 25px 18px;
+            display: flex;
+            flex-direction: column;
         }
 
         .logo {
@@ -72,6 +74,29 @@
             background: #2563eb;
             color: white;
             font-weight: 600;
+        }
+
+        .logout {
+            margin-top: auto;
+        }
+
+        .logout button {
+            display: block;
+            width: 100%;
+            color: white;
+            padding: 13px 15px;
+            border-radius: 10px;
+            background: #dc2626;
+            border: none;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .logout button:hover {
+            background: #b91c1c;
         }
 
         /* MAIN CONTENT */
@@ -268,6 +293,23 @@
             padding: 20px;
             color: #64748b;
         }
+
+        .logout { margin-top: auto; }
+        .logout button {
+            display: block;
+            width: 100%;
+            color: #ffffff;
+            padding: 13px 15px;
+            border-radius: 8px;
+            background: #dc2626;
+            border: none;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+        .logout button:hover { background: #b91c1c; }
     </style>
 </head>
 
@@ -291,6 +333,11 @@
                 <a href="{{ route('admin.manage-position-department.index') }}">Position & Department</a>
                 <a href="{{ route('admin.manage-payslips.index') }}">Payslips</a>
             </nav>
+
+            <form method="POST" action="{{ route('logout') }}" class="logout">
+                @csrf
+                <button type="submit">Logout</button>
+            </form>
 
         </aside>
 
@@ -397,7 +444,6 @@
 
     </div>
 
-    <!-- ADD MODAL -->
 
     <div id="addModal" class="modal-backdrop">
 
@@ -449,8 +495,7 @@
         </div>
 
     </div>
-
-    <!-- EDIT MODAL -->
+    
 
     <div id="editModal" class="modal-backdrop">
 

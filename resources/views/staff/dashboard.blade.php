@@ -27,6 +27,8 @@
             background: #0f172a;
             color: white;
             padding: 25px 18px;
+            display: flex;
+            flex-direction: column;
         }
 
         .logo {
@@ -77,7 +79,17 @@
         }
 
         .logout {
-            margin-top: 25px;
+            margin-top: auto;
+        }
+
+        .logout button {
+            background: #dc2626;
+            color: white;
+            font-weight: 600;
+        }
+
+        .logout button:hover {
+            background: #b91c1c;
         }
 
         .main {
@@ -146,6 +158,23 @@
         .net {
             color: #1d4ed8;
         }
+
+        .logout { margin-top: auto; }
+        .logout button {
+            display: block;
+            width: 100%;
+            color: #ffffff;
+            padding: 13px 15px;
+            border-radius: 8px;
+            background: #dc2626;
+            border: none;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+        .logout button:hover { background: #b91c1c; }
     </style>
 </head>
 

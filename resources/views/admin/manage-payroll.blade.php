@@ -30,6 +30,8 @@
             background: #0f172a;
             color: white;
             padding: 25px 18px;
+            display: flex;
+            flex-direction: column;
         }
 
         .logo {
@@ -72,6 +74,29 @@
             background: #2563eb;
             color: white;
             font-weight: 600;
+        }
+
+        .logout {
+            margin-top: auto;
+        }
+
+        .logout button {
+            display: block;
+            width: 100%;
+            color: white;
+            padding: 13px 15px;
+            border-radius: 10px;
+            background: #dc2626;
+            border: none;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .logout button:hover {
+            background: #b91c1c;
         }
 
         /* MAIN CONTENT */
@@ -250,6 +275,29 @@
             padding: 20px;
             color: #64748b;
         }
+
+        .logout {
+            margin-top: auto;
+        }
+
+        .logout button {
+            display: block;
+            width: 100%;
+            color: #ffffff;
+            padding: 13px 15px;
+            border-radius: 8px;
+            background: #dc2626;
+            border: none;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .logout button:hover {
+            background: #b91c1c;
+        }
     </style>
 </head>
 
@@ -272,8 +320,12 @@
                 <a href="{{ route('admin.manage-deductions.index') }}">Manage Deductions</a>
                 <a href="{{ route('admin.manage-position-department.index') }}">Position & Department</a>
                 <a href="{{ route('admin.manage-payslips.index') }}">Payslips</a>
-                <a href="{{ url('/') }}">Logout</a>
             </nav>
+
+            <form method="POST" action="{{ route('logout') }}" class="logout">
+                @csrf
+                <button type="submit">Logout</button>
+            </form>
 
         </aside>
 
@@ -285,15 +337,15 @@
             </div>
 
             @if(session('success'))
-                <div class="success">
-                    {{ session('success') }}
-                </div>
+            <div class="success">
+                {{ session('success') }}
+            </div>
             @endif
 
             @if(session('error'))
-                <div class="error">
-                    {{ session('error') }}
-                </div>
+            <div class="error">
+                {{ session('error') }}
+            </div>
             @endif
 
             <!-- GENERATE PAYROLL -->
@@ -314,9 +366,9 @@
 
                             @foreach($employees as $employee)
 
-                                <option value="{{ $employee->employee_id }}">
-                                    {{ $employee->user->name }} - {{ $employee->position }}
-                                </option>
+                            <option value="{{ $employee->employee_id }}">
+                                {{ $employee->user->name }} - {{ $employee->position }}
+                            </option>
 
                             @endforeach
 
@@ -329,17 +381,17 @@
                             @for($m = 1; $m <= 12; $m++)
 
                                 <option value="{{ $m }}">
-                                    {{ date('F', mktime(0, 0, 0, $m, 1)) }}
+                                {{ date('F', mktime(0, 0, 0, $m, 1)) }}
                                 </option>
 
-                            @endfor
+                                @endfor
 
                         </select>
 
                         <input type="number"
-                               name="year"
-                               value="{{ date('Y') }}"
-                               required>
+                            name="year"
+                            value="{{ date('Y') }}"
+                            required>
 
                         <button type="submit" class="generate-btn">
                             Generate
@@ -351,7 +403,6 @@
 
             </div>
 
-            <!-- PAYROLL TABLE -->
 
             <div class="card table-box">
 
@@ -419,24 +470,24 @@
 
                                 @if($payroll->payroll_status === 'Pending')
 
-                                    <form action="{{ route('admin.manage-payroll.mark-paid', $payroll->payroll_id) }}"
-                                          method="POST"
-                                          style="margin:0;">
+                                <form action="{{ route('admin.manage-payroll.mark-paid', $payroll->payroll_id) }}"
+                                    method="POST"
+                                    style="margin:0;">
 
-                                        @csrf
-                                        @method('PATCH')
+                                    @csrf
+                                    @method('PATCH')
 
-                                        <button type="submit" class="btn paid-btn">
-                                            Mark as Paid
-                                        </button>
+                                    <button type="submit" class="btn paid-btn">
+                                        Mark as Paid
+                                    </button>
 
-                                    </form>
+                                </form>
 
                                 @else
 
-                                    <span class="paid-text">
-                                        Paid
-                                    </span>
+                                <span class="paid-text">
+                                    Paid
+                                </span>
 
                                 @endif
 
